@@ -1,0 +1,243 @@
+<script src='https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js'></script>
+<script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/cfe5f316/dist/aframe-extras.js"></script>
+<!-- Load JS scripts -->
+<script src="js/vidhandler.js"></script>
+<script src="js/listen.js"></script>
+<script src="js/gesture-detector.js"></script>
+<script src="js/gesture-handler.js"></script>
+<script src="js/index.js"></script>
+<!-- rawgithack development URL -->
+<script src='https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js'></script>
+
+<link rel="stylesheet" href="static/index.css">
+
+<!--
+<style>
+  .arjs-loader {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .arjs-loader div {
+    text-align: center;
+    font-size: 1.25em;
+    color: white;
+  }
+    .footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      color: white;
+      }
+      .onebleft{
+      padding: 5px 5px 5px 5px;
+      margin: 5px 10px 5px 5px;
+      float: left;
+      z-index: 900000000000;
+      }
+      .onebright{
+      padding: 5px 5px 5px 5px;
+      margin: 5px 10px 5px 5px;
+      float: right;
+      z-index: 900000000000;
+      }
+      
+      .onebcenter{
+      text-align: center;
+      padding: 5px 5px 5px 5px;
+      margin: 5px 5px 5px 5px;
+      float: center;
+      z-index: 900000000000;
+      }
+      .imgon{
+      width: 155px;
+      height: 155px;
+      background-color:white;
+      padding: 3px 2px 2px 2px !important;
+      }
+      .imgss{
+      width: 100px !important;
+      height:100px !important;
+      }
+      .imgname{
+      font-size: 10px;
+      }
+      .header {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      color: white;
+      }
+      .oneleft{
+      padding: 5px 5px 5px 5px;
+      margin: 5px 15px 5px 5px ;
+      float: left;
+      z-index: 900000000000;
+      }
+      .body{
+      margin:0px;
+      overflow: hidden;
+      }
+      .resets{
+      background-color: rgba(51, 51, 51, 0.529);
+      color: #fff;
+      text-align: center;
+      border-radius: 2px;
+      height: 50px;
+      padding: 10px 10px 10px 10px;
+      position: fixed;
+      top: 10px;
+      text-align: center;
+      z-index: 9000000000;
+      bottom: 10px;
+      }
+      .btnskips{
+      background: rgba(0, 0, 0, 0.433);
+      color: white !important;
+      border: 3px groove rgba(164,163,161,0.59);
+      border-radius: 4px;
+      }
+      .btnskips:hover{
+      background: rgb(197, 197, 197);
+      }
+      #arjsDebugUIContainer{
+      display: none;
+    none !important;
+      } 
+      
+      img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhost-white2.png"] { display: none;}       
+</style>
+
+-->
+
+<!-- Delet the 000webhost display (footer)-->
+<style>
+    #arjsDebugUIContainer{
+      display: none;
+    none !important;
+      } 
+      
+      img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhost-white2.png"] { display: none;}       
+</style>
+
+
+<body style='margin : 0px; overflow: hidden;'>
+    
+    <div class="arjs-loader">
+        <div>This video is an example. <br> Just enjoy the augmented reality revolution!!!! <br> Loading... </div>
+    </div>  
+    
+    <a-assets>
+        <video
+          preload="auto"
+          id="vid"
+          autoplay
+          loop="true"
+          scale="1 1 1"
+          crossorigin
+          webkit-playsinline
+          playsinline
+          controls
+          src="documents/exemple_video.mp4"
+        ></video>
+    </a-assets>
+  
+    <a-scene
+      gesture-detector
+      vr-mode-ui='enabled: false;'
+      renderer="logarithmicDepthBuffer: true;"
+      embedded arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled: false;'>
+
+      <!-- use rawgithack to retrieve the correct url for nft marker (see 'pinball' below) -->
+
+      <a-nft
+          type='nft' url='PhotoTrackingVR/nft-files/nos'
+          smooth='true' smoothCount='10' smoothTolerance='0.01' smoothThreshold='5' listener>
+      </a-nft>
+      
+      <a-video
+      id="target"
+      rotation="0 0 0"
+      width="400" 
+      height="600"
+      src="#vid"
+      scale="0.8 0.8 0.8"
+      material="opacity: 0.9;"
+      gesture-handler
+    ></a-video>
+
+      
+      
+  <a-entity camera></a-entity>
+  </a-scene>
+  
+    <div class="footer">
+    <div class="row">
+        
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left">
+        <div class="onebleft">
+          <button onclick="vid.play()" class="btn btnskips">Play</button>
+        </div>
+      </div>
+
+      
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-right">
+        <div class="onebright">
+          <button onclick="refrespage()" class="btn btnskips">Refresh</button>
+        </div>
+      </div>
+      
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-right">
+        <div class="onebcenter">
+          <button onclick="vid.pause()" class="btn btnskips">Pause</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+ <!-- 
+    <script>
+      var sceneEl = document.querySelector('a-scene');
+      var entity = sceneEl.querySelector('a-entity');
+    
+      var firstVertical = true;
+    
+      if(screen.orientation.angle != 0){
+        firstVertical = false;
+      }
+    
+      start();
+    
+      function start() {
+        // For first setup 
+        entity.setAttribute('position', { x: 700 / 2, y: 0, z: -(screen.height / 2) });
+      }
+    
+      screen.orientation.addEventListener("change", function(e) {
+    
+        //First Vertical
+        if(screen.orientation.angle != 0 && firstVertical){
+    
+          entity.setAttribute('position', { x: 700, y: 0, z: -(screen.height / 2) });
+        }
+        //First Horizontal
+        if(screen.orientation.angle == 0 && !firstVertical){
+    
+          entity.setAttribute('position', { x: 1.33 * screen.width, y: 0, z: -(screen.height / 2) });
+        }
+      }, false);
+      
+    </script>
+    -->
+</body>    
